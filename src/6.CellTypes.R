@@ -42,7 +42,6 @@ rownames(annot) <- as.character(annot$EntrezGene.ID)
 claudinLowPreds<-molecular.subtyping(sbt.model = "claudinLow",
                                      data = t(scdata),
                                      annot = annot,do.mapping = T)
-#[1] "Number of genes used: 649"
 
 table(claudinLowPreds$subtype)
 
@@ -50,16 +49,6 @@ table(claudinLowPreds$subtype)
 PAM50Preds<-molecular.subtyping(sbt.model = "pam50",data=t(scdata),
                                 annot=annot, do.mapping = T)
 table(PAM50Preds$subtype) 
-
-#------------------------------
-pD <- colData(sce)
-pD$Claudin <- claudinLowPreds$subtype
-pD$pam50 <- as.character(PAM50Preds$subtype)
-index <- pD$Claudin =="Claudin"
-pD$pam50[index] <- "ClaudinLow"
-pD$pam50 <- factor(pD$pam50)
-
-table(pD$pam50,pD$SampleID)
 
 #-----------------------------------------------------------------------
 sceList <- readRDS("SingleSamples_norm_sce.rds")
