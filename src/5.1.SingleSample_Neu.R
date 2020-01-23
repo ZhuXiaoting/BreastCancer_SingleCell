@@ -128,7 +128,10 @@ genes <- c("Cd14","Bcl3","Osmr","Nfkbia")
 
 plt <- list()
 for (gene in genes){
-  tmp = plotTSNE(sce.NEU_A, colour_by = gene )+scale_fill_gradient2(name = gene, low='grey',high ='red')
+  tmp = plotTSNE(sce.NEU_A, colour_by = gene )+
+  scale_fill_gradient2(name = gene, low='grey',high ='red')+
+  theme_bw()+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
   plt[[gene]] <- tmp
 }
 multiplot(plotlist=plt, cols = 2)
